@@ -76,6 +76,8 @@ import usePortalApi from '@/hooks/usePortalApi'
 import PageTitle from '@/components/PageTitle.vue'
 import StatusBadge from '@/components/StatusBadge.vue'
 import ActionsDropdown from '@/components/ActionsDropdown.vue'
+import useLDFeatureFlag from '@/hooks/useLDFeatureFlag'
+import { FeatureFlags } from '@/constants/feature-flags'
 
 export default defineComponent({
   name: 'ServiceList',
@@ -87,7 +89,8 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const helpText = useI18nStore().state.helpText.serviceList
+    const flagEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
+    const helpText = useI18nStore().state.helpText.productList(flagEnabled)
     const { notify } = useToaster()
     const tableHeaders = [
       { label: 'Service', key: 'name' },

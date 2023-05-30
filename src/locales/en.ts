@@ -33,8 +33,8 @@ export const en = {
     alreadyCreated: 'Already have an account?',
     login: 'Log in here'
   },
-  serviceVersion: {
-    deprecatedWarning: 'This service version is now deprecated. The endpoints will remain fully usable until this version is sunsetted.',
+  productVersion: {
+    deprecatedWarning: (flagEnabled?: boolean) => `This ${flagEnabled ? 'product' : 'service'} version is now deprecated. The endpoints will remain fully usable until this version is sunsetted.`,
     unableToRetrieveDoc: 'Unable to retrieve documentation'
   },
   viewSpecModal: {
@@ -76,10 +76,6 @@ export const en = {
       copyButtonLabel: 'Credential: ',
       cancelButton: 'Cancel',
       hiddenCredentialsText: 'You will only be able to copy this credential once. Please copy and store it somewhere safe.'
-    },
-    notificationHideCredentials: {
-      part1: 'Please make sure you have stored your credentials locally as viewing these credentials will be no longer available after ',
-      part2: '. Credentials will continue to work for service access, but will no longer be visible.'
     }
   },
   application: {
@@ -94,11 +90,10 @@ export const en = {
     redirectUriLabel: 'Redirect URI',
     applicationCredentials: 'Application Credentials',
     applicationSecret: 'Application Secret',
-    confirmDelete: (name) => `Are you sure you want to delete ${name}? This action cannot be undone`,
+    confirmDelete: (name: any) => `Are you sure you want to delete ${name}? This action cannot be undone`,
     description: 'Description',
     redirectUri: (uri: string) => `Redirect URI: ${uri}`,
     referenceId: (id: string) => `Reference ID: ${id}`,
-    dcrIncompatibleApplication: 'Application Registration configuration has changed since this application has been created, create a new application to access services.',
     form: {
       referenceId: {
         label: 'Reference ID',
@@ -112,17 +107,17 @@ export const en = {
     headerDescription3: 'only be shown once.',
     headerDescription4: 'Please copy this value and keep for your records.'
   },
-  serviceList: {
-    title: 'Services',
+  productList: (flagEnabled:boolean) => ({
+    title: flagEnabled ? 'Products' : 'Services',
     actions: {
       unregister: 'Unregister'
     },
     emptyState: {
-      title: 'No Services',
+      title:  `No ${flagEnabled ? 'Products' : 'Services'}`,
       viewCatalog1: 'View the catalog',
-      viewCatalog2: 'to register to a service.'
+      viewCatalog2: `to register to a ${flagEnabled ? 'product' : 'service'}.`
     }
-  },
+  }),
   dcrAuthentication: {
     authentication: 'Authentication',
     refreshToken: 'Refresh Token'
@@ -142,7 +137,7 @@ export const en = {
     createNewApplication: 'Create new Application +',
     createApplication: 'Create an Application',
     cancelButton: 'Cancel',
-    registeredApplications: 'The following applications are already registered to this service:',
+    registeredApplications: (flagEnabled: boolean) => `The following applications are already registered to this ${flagEnabled ? 'product' : 'service'}:`,
     modalApplicationRegistrationDefault: {
       title: (serviceName: string, serviceVersion: string) => `Register for ${serviceName} - ${serviceVersion}`,
       buttonText: 'Request Access'
@@ -170,13 +165,13 @@ export const en = {
   },
   sidebar: {
     deprecated: ' (Deprecated)',
-    noResults: 'No service versions'
+    noResults: (flagEnabled: boolean) => `No ${flagEnabled ? 'product' : 'service'} versions`
   },
   catalog: {
-    services: 'Products',
+    entity: (flagEnabled: boolean) => `${flagEnabled ? 'Product' : 'Service'}`,
     noResults: 'No Products listed'
   },
-  services: {
+  products: {
     search: 'Search',
     searching: 'Searching...'
   },

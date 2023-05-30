@@ -1,7 +1,7 @@
 <template>
   <div class="products-content px-5">
     <div class="container max-w-screen-2xl mx-auto mt-6 mb-5 flex justify-between">
-      <span class="products-label">{{ helpText.services }}</span>
+      <span class="products-label">{{ catalogTitle }}</span>
       <KViewSwitcher
         data-testid="view-switcher"
         :disabled="disabled"
@@ -52,6 +52,8 @@ import EmptyState from '../assets/catalog-empty-state.svg'
 import CatalogCardList from './CatalogCardList.vue'
 import CatalogTableList from './CatalogTableList.vue'
 import { CatalogItemModel, useI18nStore } from '@/stores'
+import useLDFeatureFlag from '@/hooks/useLDFeatureFlag'
+import { FeatureFlags } from '@/constants/feature-flags'
 
 export default defineComponent({
   name: 'Catalog',
@@ -85,9 +87,12 @@ export default defineComponent({
   emits: ['cards-page-changed', 'active-view-changed'],
   setup () {
     const helpText = useI18nStore().state.helpText.catalog
+    const flagEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
+    const catalogTitle = helpText.entity(flagEnabled)
 
     return {
-      helpText
+      helpText,
+      catalogTitle
     }
   },
   data () {
