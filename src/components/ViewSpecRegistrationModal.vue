@@ -328,7 +328,7 @@ export default defineComponent({
       helpText,
       modalText,
       availableApplications,
-      alreadyRegisteredMessage: helpText.registeredApplications(flagEnabled),
+      alreadyRegisteredMessage: helpText.applicationRegistration.registeredApplications(flagEnabled),
       registeredApplications,
       submitSelection,
       closeModal

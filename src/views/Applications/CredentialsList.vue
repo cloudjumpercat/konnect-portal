@@ -2,7 +2,7 @@
   <div class="credentials-list">
     <PageTitle class="mb-5">
       <h2 class="font-normal type-lg m-0">
-        Authentication
+        {{ helpText.title }}
       </h2>
       <template #right>
         <KButton

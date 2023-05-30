@@ -37,6 +37,13 @@ export const en = {
     deprecatedWarning: (flagEnabled?: boolean) => `This ${flagEnabled ? 'product' : 'service'} version is now deprecated. The endpoints will remain fully usable until this version is sunsetted.`,
     unableToRetrieveDoc: 'Unable to retrieve documentation'
   },
+  userDropdown: {
+    myApps: 'My Apps',
+    logout: 'Logout'
+  },
+  sectionOverview: {
+    title: 'Overview'
+  },
   viewSpecModal: {
     viewSpec: 'View Spec',
     copy: 'Copy',
@@ -47,6 +54,7 @@ export const en = {
   },
   credentials: {
     noCredentialsText: 'No Credentials',
+    title: 'Authentication',
     newButtonText: 'Generate Credential',
     copySubheading: (displayName: string) => `Credential for ${displayName}`,
     creationModal: {
@@ -113,7 +121,7 @@ export const en = {
       unregister: 'Unregister'
     },
     emptyState: {
-      title:  `No ${flagEnabled ? 'Products' : 'Services'}`,
+      title: `No ${flagEnabled ? 'Products' : 'Services'}`,
       viewCatalog1: 'View the catalog',
       viewCatalog2: `to register to a ${flagEnabled ? 'product' : 'service'}.`
     }
@@ -171,6 +179,15 @@ export const en = {
     entity: (flagEnabled: boolean) => `${flagEnabled ? 'Product' : 'Service'}`,
     noResults: 'No Products listed'
   },
+  catalogItem: {
+    latestVersion: 'Latest Version:',
+    specificationLink: 'Specification',
+    documentationLink: 'Documentation'
+  },
+  catalogTable: {
+    specificationLink: 'Specification',
+    documentationLink: 'Documentation'
+  },
   products: {
     search: 'Search',
     searching: 'Searching...'
@@ -178,15 +195,19 @@ export const en = {
   copyButton: {
     clickToCopy: 'Click to copy',
     copyToClipboard: 'Copy to clipboard',
+    ariaLabel: 'Copy button content to clipboard',
     failedToCopy: (textToCopy: string) => `Failed to copy ${textToCopy} to clipboard`,
     copiedToClipboard: (textToCopy: string) => `"${textToCopy}" copied to clipboard`
 
   },
   nav: {
-    catalog: 'Catalog'
+    catalog: 'Catalog',
+    logoAlt: 'logo'
   },
-  forbidden:
-  {
+  authCard: {
+    logoAlt: 'logo'
+  },
+  forbidden: {
     http403: '403',
     goBack: 'Go back',
     sorryMessage: 'Sorry. You are not authorized to view this page.',
@@ -196,7 +217,8 @@ export const en = {
     http404: '404',
     goBack: 'Go back',
     sorryMessage: 'Sorry. We cannot find the page you are looking for.',
-    home: 'home'
+    home: 'home',
+    logoAlt: 'logo'
   },
   myApp: {
     newApp: 'New App',
