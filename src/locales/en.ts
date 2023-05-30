@@ -124,6 +124,12 @@ export const en = {
       title: `No ${flagEnabled ? 'Products' : 'Services'}`,
       viewCatalog1: 'View the catalog',
       viewCatalog2: `to register to a ${flagEnabled ? 'product' : 'service'}.`
+    },
+    labels: {
+      name: flagEnabled ? 'Product' : 'Service',
+      version: 'Version',
+      status: 'Status',
+      actions: 'Actions'
     }
   }),
   dcrAuthentication: {

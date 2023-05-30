@@ -93,10 +93,10 @@ export default defineComponent({
     const helpText = useI18nStore().state.helpText.productList(flagEnabled)
     const { notify } = useToaster()
     const tableHeaders = [
-      { label: 'Service', key: 'name' },
-      { label: 'Version', key: 'version' },
-      { label: 'Status', key: 'status' },
-      { key: 'actions', hideLabel: true }
+      { label: helpText.labels.name, key: 'name' },
+      { label: helpText.labels.version, key: 'version' },
+      { label: helpText.labels.status, key: 'status' },
+      { key: helpText.labels.actions, hideLabel: true }
     ]
 
     const { portalApiV2 } = usePortalApi()
