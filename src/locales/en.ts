@@ -237,5 +237,23 @@ export const en = {
     create: 'Create a new app',
     getStarted: ' to get started',
     deleteDialog: (name: string) => `Are you sure you want to delete ${name}? This action cannot be undone.`
+  },
+  router: {
+    portalTitle: '| Developer Portal',
+    loginTitle: 'Log In',
+    registrationTitle: 'Registration',
+    forgotPasswordTitle: 'Forgot Password',
+    resetPasswordTitle: 'Reset Password',
+    catalogTitle: (flagEnabled: boolean) => `${flagEnabled ? 'Product' : 'Service'} Catalog`,
+    specTitle: 'API Spec',
+    docsTitle: 'API Docs',
+    appsTitle: 'My Apps',
+    createAppTitle: 'Create New Application',
+    createAppTitle2: 'Create Application',
+    viewAppTitle: 'Application',
+    updateAppTitle: 'Update Application',
+    notFoundTitle: 'Not Found',
+    forbiddenTitle: 'Forbidden',
+    errorTitle: 'Error'
   }
 }

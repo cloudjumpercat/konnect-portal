@@ -43,7 +43,6 @@ async function init () {
 
   registerComponents(app)
 
-  const router = portalRouter()
   const { portalApiV2 } = usePortalApi()
 
   try {
@@ -99,6 +98,8 @@ async function init () {
     const { initialize: initLaunchDarkly } = useLaunchDarkly()
 
     await initLaunchDarkly()
+
+    const router = portalRouter()
 
     app.use(router)
 

@@ -2,7 +2,7 @@ import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
 import { session } from '@/services'
-import { useAppStore } from '@/stores'
+import { useAppStore, useI18nStore } from '@/stores'
 import Shell from '../views/Shell.vue'
 import Services from '../views/Services.vue'
 import ServiceShell from '../views/ServiceShell.vue'
@@ -21,8 +21,10 @@ import {
   shouldDeveloperAccessRoute,
   shouldRedirectToLogin
 } from '@/router/route-utils'
+import useLDFeatureFlag from '@/hooks/useLDFeatureFlag'
+import { FeatureFlags } from '@/constants/feature-flags'
 
-const routes: Readonly<RouteRecordRaw[]> = [
+const routes = (flagEnabled:boolean, helpText: Record<string, any>):Readonly<RouteRecordRaw[]> => ([
   {
     path: '/',
     component: Shell,
@@ -31,7 +33,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '/login/:sso?',
         name: 'login',
         meta: {
-          title: 'Log In'
+          title: helpText.loginTitle
         },
         component: Login
       },
@@ -39,7 +41,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '/register',
         name: 'registration',
         meta: {
-          title: 'Registration'
+          title: helpText.registrationTitle
         },
         component: Registration
       },
@@ -47,7 +49,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '/forgot-password',
         name: 'forgot-password',
         meta: {
-          title: 'Forgot Password'
+          title: helpText.forgotPasswordTitle
         },
         component: ForgotPassword
       },
@@ -55,7 +57,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '/reset-password',
         name: 'reset-password',
         meta: {
-          title: 'Reset Password'
+          title: helpText.resetPasswordTitle
         },
         component: ResetPassword
       },
@@ -63,7 +65,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '',
         name: 'catalog',
         meta: {
-          title: 'Service Catalog'
+          title: helpText.catalogTitle(flagEnabled)
         },
         component: Services
       },
@@ -78,7 +80,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
             path: '/spec/:service_package/:service_version?',
             name: 'spec',
             meta: {
-              title: 'API Spec',
+              title: helpText.specTitle,
               isAuthorized: (route, { portalId }) => canUserAccess({
                 service: 'konnect',
                 action: '#view',
@@ -91,7 +93,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
             path: '/docs/:service_package/:slug*',
             name: 'api-documentation-page',
             meta: {
-              title: 'API Docs',
+              title: helpText.documentationTitle,
               isAuthorized: (route, { portalId }) => canUserAccess({
                 service: 'konnect',
                 action: '#view',
@@ -106,7 +108,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '/my-apps',
         name: 'my-apps',
         meta: {
-          title: 'My Apps'
+          title: helpText.appsTitle
         },
         component: () => import('../views/MyApps.vue')
       },
@@ -120,26 +122,26 @@ const routes: Readonly<RouteRecordRaw[]> = [
             path: 'create',
             name: 'create-application',
             meta: {
-              title: 'Create New Application'
+              title: helpText.createAppTitle
             },
             component: () => import('../views/Applications/ApplicationForm.vue')
           },
           {
             path: ':application_id',
             name: 'application',
-            meta: { title: 'Create Application' },
+            meta: { title: helpText.createAppTitle2 },
             component: () => import('../views/Shell.vue'),
             children: [
               {
                 path: '',
                 name: 'show-application',
-                meta: { title: 'Application' },
+                meta: { title: helpText.viewAppTitle },
                 component: () => import('../views/Applications/ApplicationDetail.vue')
               },
               {
                 path: 'update',
                 name: 'update-application',
-                meta: { title: 'Update Application' },
+                meta: { title: helpText.updateAppTitle },
                 component: () => import('../views/Applications/ApplicationForm.vue')
               }
             ]
@@ -150,7 +152,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '/404',
         name: 'not-found',
         meta: {
-          name: 'Not Found'
+          name: helpText.notFoundTitle
         },
         component: () => import('../views/NotFound.vue')
       },
@@ -158,7 +160,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '/403',
         name: 'forbidden',
         meta: {
-          name: 'Forbidden'
+          name: helpText.forbiddenTitle
         },
         component: () => import('../views/Forbidden.vue')
       },
@@ -166,7 +168,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
         path: '/:pathMatch(.*)*',
         name: 'not-found-redirect',
         meta: {
-          title: 'Not Found'
+          title: helpText.notFoundTitle
         },
         component: () => {
           window.location.href = '/404'
@@ -174,15 +176,17 @@ const routes: Readonly<RouteRecordRaw[]> = [
       }
     ]
   }
-]
+])
 
 export const portalRouter = () => {
   const appStore = useAppStore()
   const { portalId, globalLoading, isPublic } = storeToRefs(appStore)
+  const flagEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
+  const helpText = useI18nStore().state.helpText.router
 
   const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    routes
+    routes: routes(flagEnabled, helpText)
   })
 
   router.beforeEach((to, from, next) => {

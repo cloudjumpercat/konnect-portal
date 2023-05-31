@@ -39,12 +39,8 @@
             </ActionsDropdown>
           </template>
           <template #empty-state>
-            <EmptyState
-              message="No Services"
-            >
-              <template
-                #title
-              >
+            <EmptyState :message="helpText.emptyState.title">
+              <template #title>
                 {{ helpText.emptyState.title }}
               </template>
               <template #message>
