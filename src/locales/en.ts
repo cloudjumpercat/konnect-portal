@@ -34,7 +34,7 @@ export const en = {
     login: 'Log in here'
   },
   productVersion: {
-    deprecatedWarning: (flagEnabled?: boolean) => `This ${flagEnabled ? 'product' : 'service'} version is now deprecated. The endpoints will remain fully usable until this version is sunsetted.`,
+    deprecatedWarning: (apiProductLanguageEnabled?: boolean) => `This ${apiProductLanguageEnabled ? 'product' : 'service'} version is now deprecated. The endpoints will remain fully usable until this version is sunsetted.`,
     unableToRetrieveDoc: 'Unable to retrieve documentation'
   },
   userDropdown: {
@@ -115,18 +115,18 @@ export const en = {
     headerDescription3: 'only be shown once.',
     headerDescription4: 'Please copy this value and keep for your records.'
   },
-  productList: (flagEnabled:boolean) => ({
-    title: flagEnabled ? 'Products' : 'Services',
+  productList: (apiProductLanguageEnabled:boolean) => ({
+    title: apiProductLanguageEnabled ? 'Products' : 'Services',
     actions: {
       unregister: 'Unregister'
     },
     emptyState: {
-      title: `No ${flagEnabled ? 'Products' : 'Services'}`,
+      title: `No ${apiProductLanguageEnabled ? 'Products' : 'Services'}`,
       viewCatalog1: 'View the catalog',
-      viewCatalog2: `to register to a ${flagEnabled ? 'product' : 'service'}.`
+      viewCatalog2: `to register to a ${apiProductLanguageEnabled ? 'product' : 'service'}.`
     },
     labels: {
-      name: flagEnabled ? 'Product' : 'Service',
+      name: apiProductLanguageEnabled ? 'Product' : 'Service',
       version: 'Version',
       status: 'Status',
       actions: 'Actions'
@@ -151,7 +151,7 @@ export const en = {
     createNewApplication: 'Create new Application +',
     createApplication: 'Create an Application',
     cancelButton: 'Cancel',
-    registeredApplications: (flagEnabled: boolean) => `The following applications are already registered to this ${flagEnabled ? 'product' : 'service'}:`,
+    registeredApplications: (apiProductLanguageEnabled: boolean) => `The following applications are already registered to this ${apiProductLanguageEnabled ? 'product' : 'service'}:`,
     modalApplicationRegistrationDefault: {
       title: (serviceName: string, serviceVersion: string) => `Register for ${serviceName} - ${serviceVersion}`,
       buttonText: 'Request Access'
@@ -179,10 +179,10 @@ export const en = {
   },
   sidebar: {
     deprecated: ' (Deprecated)',
-    noResults: (flagEnabled: boolean) => `No ${flagEnabled ? 'product' : 'service'} versions`
+    noResults: (apiProductLanguageEnabled: boolean) => `No ${apiProductLanguageEnabled ? 'product' : 'service'} versions`
   },
   catalog: {
-    entity: (flagEnabled: boolean) => `${flagEnabled ? 'Product' : 'Service'}`,
+    entity: (apiProductLanguageEnabled: boolean) => `${apiProductLanguageEnabled ? 'Product' : 'Service'}`,
     noResults: 'No Products listed'
   },
   catalogItem: {
@@ -244,7 +244,7 @@ export const en = {
     registrationTitle: 'Registration',
     forgotPasswordTitle: 'Forgot Password',
     resetPasswordTitle: 'Reset Password',
-    catalogTitle: (flagEnabled: boolean) => `${flagEnabled ? 'Product' : 'Service'} Catalog`,
+    catalogTitle: (apiProductLanguageEnabled: boolean) => `${apiProductLanguageEnabled ? 'Product' : 'Service'} Catalog`,
     specTitle: 'API Spec',
     docsTitle: 'API Docs',
     appsTitle: 'My Apps',

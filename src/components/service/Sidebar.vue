@@ -42,8 +42,8 @@ import { FeatureFlags } from '@/constants/feature-flags'
 const productStore = useProductStore()
 const { product: servicePackage, activeProductVersionId } = storeToRefs(productStore)
 const helpText = useI18nStore().state.helpText.sidebar
-const flagEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
-const noResultsMessage = helpText.noResults(flagEnabled)
+const apiProductLanguageEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
+const noResultsMessage = helpText.noResults(apiProductLanguageEnabled)
 
 const emit = defineEmits(['operationSelected'])
 

@@ -24,7 +24,7 @@ import {
 import useLDFeatureFlag from '@/hooks/useLDFeatureFlag'
 import { FeatureFlags } from '@/constants/feature-flags'
 
-const routes = (flagEnabled:boolean, helpText: Record<string, any>):Readonly<RouteRecordRaw[]> => ([
+const routes = (apiProductLanguageEnabled:boolean, helpText: Record<string, any>):Readonly<RouteRecordRaw[]> => ([
   {
     path: '/',
     component: Shell,
@@ -65,7 +65,7 @@ const routes = (flagEnabled:boolean, helpText: Record<string, any>):Readonly<Rou
         path: '',
         name: 'catalog',
         meta: {
-          title: helpText.catalogTitle(flagEnabled)
+          title: helpText.catalogTitle(apiProductLanguageEnabled)
         },
         component: Services
       },
@@ -181,12 +181,12 @@ const routes = (flagEnabled:boolean, helpText: Record<string, any>):Readonly<Rou
 export const portalRouter = () => {
   const appStore = useAppStore()
   const { portalId, globalLoading, isPublic } = storeToRefs(appStore)
-  const flagEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
+  const apiProductLanguageEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
   const helpText = useI18nStore().state.helpText.router
 
   const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    routes: routes(flagEnabled, helpText)
+    routes: routes(apiProductLanguageEnabled, helpText)
   })
 
   router.beforeEach((to, from, next) => {

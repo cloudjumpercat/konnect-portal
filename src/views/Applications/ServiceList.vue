@@ -85,8 +85,8 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const flagEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
-    const helpText = useI18nStore().state.helpText.productList(flagEnabled)
+    const apiProductLanguageEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
+    const helpText = useI18nStore().state.helpText.productList(apiProductLanguageEnabled)
     const { notify } = useToaster()
     const tableHeaders = [
       { label: helpText.labels.name, key: 'name' },

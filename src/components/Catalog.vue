@@ -87,8 +87,8 @@ export default defineComponent({
   emits: ['cards-page-changed', 'active-view-changed'],
   setup () {
     const helpText = useI18nStore().state.helpText.catalog
-    const flagEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
-    const catalogTitle = helpText.entity(flagEnabled)
+    const apiProductLanguageEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
+    const catalogTitle = helpText.entity(apiProductLanguageEnabled)
 
     return {
       helpText,
