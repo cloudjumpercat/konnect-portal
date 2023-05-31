@@ -189,12 +189,14 @@ export const portalRouter = () => {
     routes: routes(apiProductLanguageEnabled, helpText)
   })
 
+  const portalTitle = helpText.portalTitle
+
   router.beforeEach((to, from, next) => {
-    document.title = `${
-      typeof to.meta.title === 'function'
-        ? to.meta.title(to)
-        : to.meta.title || ''
-    } | Developer Portal`
+    const metaTitle = typeof to.meta.title === 'function'
+      ? to.meta.title(to)
+      : to.meta.title || ''
+
+    document.title = `${metaTitle} | ${portalTitle}`
     next()
   })
 

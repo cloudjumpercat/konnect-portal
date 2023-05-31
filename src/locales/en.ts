@@ -239,7 +239,7 @@ export const en = {
     deleteDialog: (name: string) => `Are you sure you want to delete ${name}? This action cannot be undone.`
   },
   router: {
-    portalTitle: '| Developer Portal',
+    portalTitle: 'Developer Portal',
     loginTitle: 'Log In',
     registrationTitle: 'Registration',
     forgotPasswordTitle: 'Forgot Password',
