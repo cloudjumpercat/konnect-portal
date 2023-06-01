@@ -24,7 +24,7 @@ import {
 import useLDFeatureFlag from '@/hooks/useLDFeatureFlag'
 import { FeatureFlags } from '@/constants/feature-flags'
 
-const routes = (apiProductLanguageEnabled:boolean, helpText: Record<string, any>):Readonly<RouteRecordRaw[]> => ([
+const makeRoutes = (apiProductLanguageEnabled:boolean, helpText: Record<string, any>):Readonly<RouteRecordRaw[]> => ([
   {
     path: '/',
     component: Shell,
@@ -65,14 +65,14 @@ const routes = (apiProductLanguageEnabled:boolean, helpText: Record<string, any>
         path: '',
         name: 'catalog',
         meta: {
-          title: helpText.catalogTitle(apiProductLanguageEnabled)
+          title: apiProductLanguageEnabled ? helpText.catalogTitleProduct : helpText.catalogTitleService
         },
         component: Services
       },
       {
         // Nest Service-related routes, so they can use a unified shell component
-        // that provides the navigation sidebar and handles service data fetching.
-        // All child routes have the current Service injected in the `service` prop.
+        // that provides the navigation sidebar and handles product data fetching.
+        // All child routes have the current Service injected in the `product` prop.
         path: '/',
         component: ServiceShell,
         children: [
@@ -82,7 +82,7 @@ const routes = (apiProductLanguageEnabled:boolean, helpText: Record<string, any>
             meta: {
               title: helpText.specTitle,
               isAuthorized: (route, { portalId }) => canUserAccess({
-                service: 'konnect',
+                product: 'konnect',
                 action: '#view',
                 resourcePath: `portals/${portalId}/services/${route.params.service_package}`
               })
@@ -95,7 +95,7 @@ const routes = (apiProductLanguageEnabled:boolean, helpText: Record<string, any>
             meta: {
               title: helpText.documentationTitle,
               isAuthorized: (route, { portalId }) => canUserAccess({
-                service: 'konnect',
+                product: 'konnect',
                 action: '#view',
                 resourcePath: `portals/${portalId}/services/${route.params.service_package}`
               })
@@ -186,7 +186,7 @@ export const portalRouter = () => {
 
   const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    routes: routes(apiProductLanguageEnabled, helpText)
+    routes: makeRoutes(apiProductLanguageEnabled, helpText)
   })
 
   const portalTitle = helpText.portalTitle

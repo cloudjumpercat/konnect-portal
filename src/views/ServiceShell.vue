@@ -20,7 +20,7 @@
         <KAlert
           v-if="activeServiceVersionDeprecated"
           appearance="warning"
-          :alert-message="helpText.productVersion.deprecatedWarning(apiProductLanguageEnabled)"
+          :alert-message="deprecatedWarning"
           class="deprecated-warning"
         />
         <!-- pass service to child routes as a prop -->
@@ -58,6 +58,7 @@ const activeServiceVersionDeprecated = ref(false)
 const deselectOperation = ref<boolean>(false)
 
 const apiProductLanguageEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
+const deprecatedWarning = apiProductLanguageEnabled ? helpText.productVersion.deprecatedWarningProduct : helpText.productVersion.deprecatedWarningService
 
 // @ts-ignore
 const productStore = useProductStore()

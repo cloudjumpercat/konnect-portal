@@ -2,7 +2,7 @@
   <div class="services-list">
     <PageTitle class="mb-5">
       <h2 class="font-normal type-lg m-0">
-        {{ helpText.title }}
+        {{ title }}
       </h2>
     </PageTitle>
     <KCard>
@@ -39,9 +39,9 @@
             </ActionsDropdown>
           </template>
           <template #empty-state>
-            <EmptyState :message="helpText.emptyState.title">
+            <EmptyState :message="emptyStateTitle">
               <template #title>
-                {{ helpText.emptyState.title }}
+                {{ emptyStateTitle }}
               </template>
               <template #message>
                 <div>
@@ -49,7 +49,7 @@
                     :to="{ name: 'catalog' }"
                   >
                     {{ helpText.emptyState.viewCatalog1 }}
-                  </router-link> {{ helpText.emptyState.viewCatalog2 }}
+                  </router-link> {{ viewCatalog2 }}
                 </div>
               </template>
             </EmptyState>
@@ -86,10 +86,16 @@ export default defineComponent({
   },
   setup (props) {
     const apiProductLanguageEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
-    const helpText = useI18nStore().state.helpText.productList(apiProductLanguageEnabled)
+    const helpText = useI18nStore().state.helpText.productList
+
+    const nameLabel = apiProductLanguageEnabled ? helpText.labels.nameProduct : helpText.labels.nameService
+    const title = apiProductLanguageEnabled ? helpText.titleProducts : helpText.titleServices
+    const emptyStateTitle = apiProductLanguageEnabled ? helpText.emptyState.titleProducts : helpText.emptyState.titleServices
+    const viewCatalog2 = apiProductLanguageEnabled ? helpText.emptyState.viewCatalog2Product : helpText.emptyState.viewCatalog2Service
+
     const { notify } = useToaster()
     const tableHeaders = [
-      { label: helpText.labels.name, key: 'name' },
+      { label: nameLabel, key: 'name' },
       { label: helpText.labels.version, key: 'version' },
       { label: helpText.labels.status, key: 'status' },
       { key: helpText.labels.actions, hideLabel: true }
@@ -182,7 +188,10 @@ export default defineComponent({
       handleDeleteRegistration,
       fetcher,
       fetcherCacheKey,
-      paginationConfig
+      paginationConfig,
+      emptyStateTitle,
+      title,
+      viewCatalog2
     }
   }
 })

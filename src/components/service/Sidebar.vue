@@ -43,7 +43,7 @@ const productStore = useProductStore()
 const { product: servicePackage, activeProductVersionId } = storeToRefs(productStore)
 const helpText = useI18nStore().state.helpText.sidebar
 const apiProductLanguageEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
-const noResultsMessage = helpText.noResults(apiProductLanguageEnabled)
+const noResultsMessage = apiProductLanguageEnabled ? helpText.noResultsProduct : helpText.noResultsService
 
 const emit = defineEmits(['operationSelected'])
 

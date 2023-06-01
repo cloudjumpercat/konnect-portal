@@ -16,7 +16,7 @@
       <div class="serv-catalog-no-services type-lg color-text_colors-secondary">
         <template v-if="!loading">
           <EmptyState class="mb-2 mx-auto" />
-          {{ helpText.noResults }}
+          {{ noResultsMessage }}
         </template>
         <div
           v-else
@@ -88,11 +88,13 @@ export default defineComponent({
   setup () {
     const helpText = useI18nStore().state.helpText.catalog
     const apiProductLanguageEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
-    const catalogTitle = helpText.entity(apiProductLanguageEnabled)
+    const catalogTitle = apiProductLanguageEnabled ? helpText.entityTypeProduct : helpText.entityTypeService
+    const noResultsMessage = apiProductLanguageEnabled ? helpText.noResultsProduct : helpText.noResultsService
 
     return {
       helpText,
-      catalogTitle
+      catalogTitle,
+      noResultsMessage
     }
   },
   data () {

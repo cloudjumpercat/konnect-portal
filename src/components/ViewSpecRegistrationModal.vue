@@ -154,7 +154,7 @@ export default defineComponent({
   emits: ['close'],
 
   setup (props, { emit }) {
-    const apiProductLanguageEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
+    const apiProductFlagEnabled = useLDFeatureFlag(FeatureFlags.ApiProductBuilder, false)
     const $router = useRouter()
     const $route = useRoute()
     const { notify } = useToaster()
@@ -320,6 +320,8 @@ export default defineComponent({
       }
     })
 
+    const alreadyRegisteredMessage = apiProductFlagEnabled ? helpText.applicationRegistration.registeredApplicationsProduct : helpText.applicationRegistration.registeredApplicationsService
+
     return {
       currentState,
       errorMessage,
@@ -328,7 +330,7 @@ export default defineComponent({
       helpText,
       modalText,
       availableApplications,
-      alreadyRegisteredMessage: helpText.applicationRegistration.registeredApplications(apiProductLanguageEnabled),
+      alreadyRegisteredMessage,
       registeredApplications,
       submitSelection,
       closeModal

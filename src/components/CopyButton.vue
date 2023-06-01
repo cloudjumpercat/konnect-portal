@@ -51,12 +51,12 @@ export default defineComponent({
       if (!executeCopy(props.textToCopy)) {
         notify({
           appearance: 'danger',
-          message: helpText.failedToCopy(props.textToCopy)
+          message: helpText.copyFailed.start + (props.textToCopy) + helpText.copyFailed.end
         })
       }
 
       notify({
-        message: helpText.copiedToClipboard(props.textToCopy)
+        message: helpText.copySucceeded.start + (props.textToCopy) + helpText.copySucceeded.end
       })
     }
 

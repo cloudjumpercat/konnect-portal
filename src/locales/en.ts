@@ -34,7 +34,8 @@ export const en = {
     login: 'Log in here'
   },
   productVersion: {
-    deprecatedWarning: (apiProductLanguageEnabled?: boolean) => `This ${apiProductLanguageEnabled ? 'product' : 'service'} version is now deprecated. The endpoints will remain fully usable until this version is sunsetted.`,
+    deprecatedWarningProduct: 'This product version is now deprecated. The endpoints will remain fully usable until this version is sunsetted.',
+    deprecatedWarningService: 'This service version is now deprecated. The endpoints will remain fully usable until this version is sunsetted.',
     unableToRetrieveDoc: 'Unable to retrieve documentation'
   },
   userDropdown: {
@@ -56,7 +57,7 @@ export const en = {
     noCredentialsText: 'No Credentials',
     title: 'Authentication',
     newButtonText: 'Generate Credential',
-    copySubheading: (displayName: string) => `Credential for ${displayName}`,
+    copySubheading: 'Credential for ',
     creationModal: {
       title: 'Name for the credential',
       continueButton: 'Generate',
@@ -66,7 +67,10 @@ export const en = {
     },
     revokeModal: {
       title: 'Revoke the credential',
-      description: (credentialKeyLabel: string) => `Key '${credentialKeyLabel}' will be revoked, you cannot undo this action.`,
+      description: {
+        start: 'Key ',
+        end: ' will be revoked, you cannot undo this action.'
+      },
       revokeButton: 'Revoke',
       cancelButton: 'Cancel'
     },
@@ -115,23 +119,27 @@ export const en = {
     headerDescription3: 'only be shown once.',
     headerDescription4: 'Please copy this value and keep for your records.'
   },
-  productList: (apiProductLanguageEnabled:boolean) => ({
-    title: apiProductLanguageEnabled ? 'Products' : 'Services',
+  productList: {
+    titleProducts: 'Products',
+    titleServices: 'Services',
     actions: {
       unregister: 'Unregister'
     },
     emptyState: {
-      title: `No ${apiProductLanguageEnabled ? 'Products' : 'Services'}`,
+      titleProducts: 'No Products',
+      titleServices: 'No Services',
       viewCatalog1: 'View the catalog',
-      viewCatalog2: `to register to a ${apiProductLanguageEnabled ? 'product' : 'service'}.`
+      viewCatalog2Product: 'to register to a product.',
+      viewCatalog2Service: 'to register to a service.'
     },
     labels: {
-      name: apiProductLanguageEnabled ? 'Product' : 'Service',
+      nameProduct: 'Product',
+      nameService: 'Service',
       version: 'Version',
       status: 'Status',
       actions: 'Actions'
     }
-  }),
+  },
   dcrAuthentication: {
     authentication: 'Authentication',
     refreshToken: 'Refresh Token'
@@ -151,7 +159,8 @@ export const en = {
     createNewApplication: 'Create new Application +',
     createApplication: 'Create an Application',
     cancelButton: 'Cancel',
-    registeredApplications: (apiProductLanguageEnabled: boolean) => `The following applications are already registered to this ${apiProductLanguageEnabled ? 'product' : 'service'}:`,
+    registeredApplicationsProduct: 'The following applications are already registered to this product:',
+    registeredApplicationsService: 'The following applications are already registered to this service:',
     modalApplicationRegistrationDefault: {
       title: (serviceName: string, serviceVersion: string) => `Register for ${serviceName} - ${serviceVersion}`,
       buttonText: 'Request Access'
@@ -179,11 +188,14 @@ export const en = {
   },
   sidebar: {
     deprecated: ' (Deprecated)',
-    noResults: (apiProductLanguageEnabled: boolean) => `No ${apiProductLanguageEnabled ? 'product' : 'service'} versions`
+    noResultsProduct: 'No product versions',
+    noResultsService: 'No service versions'
   },
   catalog: {
-    entity: (apiProductLanguageEnabled: boolean) => `${apiProductLanguageEnabled ? 'Product' : 'Service'}`,
-    noResults: 'No Products listed'
+    entityTypeProduct: 'Product',
+    entityTypeService: 'Service',
+    noResultsProduct: 'No Products listed',
+    noResultsService: 'No Services listed'
   },
   catalogItem: {
     latestVersion: 'Latest Version:',
@@ -202,9 +214,14 @@ export const en = {
     clickToCopy: 'Click to copy',
     copyToClipboard: 'Copy to clipboard',
     ariaLabel: 'Copy button content to clipboard',
-    failedToCopy: (textToCopy: string) => `Failed to copy ${textToCopy} to clipboard`,
-    copiedToClipboard: (textToCopy: string) => `"${textToCopy}" copied to clipboard`
-
+    copyFailed: {
+      start: 'Failed to copy',
+      end: 'to clipboard'
+    },
+    copySucceeded: {
+      start: '"',
+      end: '" copied to clipboard'
+    }
   },
   nav: {
     catalog: 'Catalog',
@@ -244,7 +261,8 @@ export const en = {
     registrationTitle: 'Registration',
     forgotPasswordTitle: 'Forgot Password',
     resetPasswordTitle: 'Reset Password',
-    catalogTitle: (apiProductLanguageEnabled: boolean) => `${apiProductLanguageEnabled ? 'Product' : 'Service'} Catalog`,
+    catalogTitleProduct: 'Product Catalog',
+    catalogTitleService: 'Service Catalog',
     specTitle: 'API Spec',
     docsTitle: 'API Docs',
     appsTitle: 'My Apps',
